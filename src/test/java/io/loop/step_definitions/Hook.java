@@ -6,15 +6,22 @@ import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.loop.utilities.BrowserUtils;
 import io.loop.utilities.Driver;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
 
 public class Hook {
+    private static final Logger LOG = LogManager.getLogger(Hook.class);
+
+
     @Before
     public void setUp(Scenario scenario) {
         Driver.getDriver();
         BrowserUtils.myScenario = scenario;
+        LOG.info("..........Start Automation............LOOPCAMP");
     }
     @After
     public void tearDown(Scenario scenario) {
@@ -23,6 +30,7 @@ public class Hook {
             final byte[] screenshot = ((TakesScreenshot)Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
             scenario.attach(screenshot,"image/png",scenario.getName());
         }
+        LOG.info("..........Start Automation............LOOPCAMP");
         Driver.closeDriver();
     }
   //  @AfterStep
