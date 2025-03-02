@@ -18,7 +18,9 @@ public class Driver {
     making driver instance private
     static-run before everything else and user in static method
      */
-    private static WebDriver driver;
+   // private static WebDriver driver;
+    //implement threadLocal to achieve multi thread local
+    private static InheritableThreadLocal<WebDriver> driverPool = new InheritableThreadLocal<>();
 
     /*
     reusable method that will return same driver instance everytime called
@@ -28,25 +30,31 @@ public class Driver {
      * @return
      */
     public static WebDriver getDriver() {
-        if (driver == null) {
+        if (driverPool.get() == null) {
             String browserType = ConfigurationReader.getProperties("browser");
             switch (browserType.toLowerCase()) {
                 case "chrome":
-                    driver = new ChromeDriver();
+                    driverPool.set(new ChromeDriver());
+                    driverPool.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+                    driverPool.get().manage().window().maximize();
                     break;
 
                 case "firefox":
-                    driver = new FirefoxDriver();
+                    driverPool.set(new ChromeDriver());
+                    driverPool.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+                    driverPool.get().manage().window().maximize();
                     break;
 
                 case "safari":
-                    driver = new SafariDriver();
+                    driverPool.set(new ChromeDriver());
+                    driverPool.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+                    driverPool.get().manage().window().maximize();
                     break;
             }
-            driver.manage().window().maximize();
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+           // driver.manage().window().maximize();
+            //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         }
-        return driver;
+        return driverPool.get();
     }
 
     /**
@@ -55,9 +63,10 @@ public class Driver {
      */
 
     public static void closeDriver() {
-        if (driver != null) {
-            driver.quit();
-            driver = null;
+        if (driverPool.get() != null) {
+            driverPool.get().quit();
+           // driver = null;
+            driverPool.remove();
         }
     }
 }

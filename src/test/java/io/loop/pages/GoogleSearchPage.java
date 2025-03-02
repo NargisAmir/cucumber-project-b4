@@ -23,7 +23,8 @@ public class GoogleSearchPage {
     @FindBy(xpath = "//div[@class='recaptcha-checkbox-border']" )
     public WebElement captcha;
 
-    @FindBy(xpath = "//a[@class='C3TEmf']")
+    @FindBy(xpath = "//div[@class='wvKXQ']")
+
     public WebElement capital;
 
     public void handleReCaptcha(WebDriver driver, WebElement captchaElement) {
