@@ -2,6 +2,7 @@ package io.loop.utilities;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
@@ -47,6 +48,14 @@ public class Driver {
 
                 case "safari":
                     driverPool.set(new ChromeDriver());
+                    driverPool.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+                    driverPool.get().manage().window().maximize();
+                    break;
+
+                case "headless":
+                    ChromeOptions options = new ChromeOptions();
+                    options.addArguments("--headless");
+                    driverPool.set(new ChromeDriver(options));
                     driverPool.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
                     driverPool.get().manage().window().maximize();
                     break;

@@ -1,6 +1,6 @@
 Feature: Passing multiple parameters to the same step
 
-  @google_search_data_table @smoke
+  @google_search_data_table @smoke @headless
   Scenario: Searching multiple items
     Given user in on Google search page
     Then user searches the following items

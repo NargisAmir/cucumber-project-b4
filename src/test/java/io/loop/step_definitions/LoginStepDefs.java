@@ -224,14 +224,14 @@ public class LoginStepDefs {
 
     @When("user enters credentials")
     public void user_enters_credentials(Map<String,String> credentials) {
-        //  for (Map.Entry<String, String> entry : credentials.entrySet()) {
-        //     String key = entry.getKey();
-        //     System.out.println("key = " + key);
+          for (Map.Entry<String, String> entry : credentials.entrySet()) {
+           String key = entry.getKey();
+             System.out.println("key = " + key);
 
-        //   String value = entry.getValue();
-        //   System.out.println("value =" + value );
-        //  System.out.println("================================");
-        //   }
+           String value = entry.getValue();
+           System.out.println("value =" + value );
+          System.out.println("================================");
+           }
         loginPage.login2(credentials.get("username"), credentials.get("password"));
     }
 
