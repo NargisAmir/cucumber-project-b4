@@ -8,6 +8,7 @@ import org.openqa.selenium.safari.SafariDriver;
 
 import java.time.Duration;
 
+
 public class Driver {
 
     /*
@@ -36,19 +37,19 @@ public class Driver {
             switch (browserType.toLowerCase()) {
                 case "chrome":
                     driverPool.set(new ChromeDriver());
-                    driverPool.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+                    driverPool.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(Integer.valueOf(ConfigurationReader.getProperties("timeouts"))));
                     driverPool.get().manage().window().maximize();
                     break;
 
                 case "firefox":
                     driverPool.set(new ChromeDriver());
-                    driverPool.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+                    driverPool.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(Integer.valueOf(ConfigurationReader.getProperties("timeouts"))));
                     driverPool.get().manage().window().maximize();
                     break;
 
                 case "safari":
                     driverPool.set(new ChromeDriver());
-                    driverPool.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+                    driverPool.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(Integer.valueOf(ConfigurationReader.getProperties("timeouts"))));
                     driverPool.get().manage().window().maximize();
                     break;
 
@@ -56,12 +57,12 @@ public class Driver {
                     ChromeOptions options = new ChromeOptions();
                     options.addArguments("--headless");
                     driverPool.set(new ChromeDriver(options));
-                    driverPool.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+                    driverPool.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(Integer.valueOf(ConfigurationReader.getProperties("timeouts"))));
                     driverPool.get().manage().window().maximize();
                     break;
             }
            // driver.manage().window().maximize();
-            //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+            //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Integer.valueOf(ConfigurationReader.getProperties("timeouts"))));
         }
         return driverPool.get();
     }

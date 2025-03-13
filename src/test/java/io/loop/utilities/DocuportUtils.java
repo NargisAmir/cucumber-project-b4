@@ -58,11 +58,11 @@ public class DocuportUtils {
      */
 
     public static void logout(WebDriver driver) throws InterruptedException {
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Integer.valueOf(ConfigurationReader.getProperties("timeouts"))));
         WebElement userIcon = driver.findElement(By.xpath("//div[@class='v-avatar primary']"));
         userIcon.click();
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Integer.valueOf(ConfigurationReader.getProperties("timeouts"))));
         WebElement logoutButton = driver.findElement(By.xpath("//span[contains(text(),'Log out')]"));
         logoutButton.click();
 
